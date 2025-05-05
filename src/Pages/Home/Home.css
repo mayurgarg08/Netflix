@@ -1,0 +1,133 @@
+.hero {
+  position: relative;
+  height: 112vh; 
+  overflow: visible;
+}
+
+.banner-video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.banner-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  border: none;
+  transform: scale(1.05);
+  /* Removed gradient masking for full visibility */
+}
+
+
+.hero-caption {
+  position: absolute;
+  width: 100%;
+  padding-left: 4%;
+  bottom: -115px;
+  padding-bottom: 160px;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent); /* Optional: better text contrast */
+  padding-bottom: 2px;
+  overflow: visible;
+}
+
+.caption-img {
+  width: 75%;
+  max-width: 370px;
+  padding-left: 5%;
+  margin-bottom: 20px;
+}
+
+.hero-caption p {
+  max-width: 450px;
+  padding-left: 5%;
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 10px;
+  padding-left: 6%;
+  margin-bottom: 50px;
+}
+
+.hero-btns .btn img {
+  width: 25px;
+}
+
+.hero-btns .btn {
+  border: 0;
+  outline: 0;
+  padding: 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hero-btns .btn.dark-btn {
+  color: #fff;
+  background: #6d6d6eb3;
+}
+
+.hero-btns .btn:hover {
+  background: #ffffffbf;
+}
+
+.hero-btns .btn.dark-btn:hover {
+  background: #6d6d6e66;
+}
+
+.more-cards {
+  padding-left: 4%;
+  margin-top: 120px;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .hero-caption .title-cards {
+    display: none;
+  }
+  .hero-btns {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  .caption-img {
+    margin-bottom: 10px;
+    width: 40%;
+  }
+  .hero-caption p {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .hero-btns .btn img {
+    width: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .caption-img {
+    display: none;
+  }
+  .hero-btns .btn img {
+    width: 15px;
+  }
+  .btn {
+    padding: 4px 10px;
+    gap: 5px;
+    font-size: 10px;
+  }
+}
