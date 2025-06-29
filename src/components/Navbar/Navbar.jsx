@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import search_icon from "../../assets/search_icon.svg";
@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom"; // ✅ Import this
 const Navbar = () => {
   const navRef = useRef();
   const navigate = useNavigate(); // ✅ Create navigate function
+
+  const [showSearch, setShowSearch] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,9 +30,21 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleSearchToggle = () => {
+    setShowSearch((prev) => !prev);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+
+    if (query.trim()) {
+      navigate(`/search?q=${query}`);
+    }
+  };
+
   const handleLogout = async () => {
-    await logout(); // sign out
-    navigate("/login"); // ✅ redirect to login
+    await logout();
+    navigate("/login");
   };
 
   return (
@@ -46,7 +61,26 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-right">
-        <img src={search_icon} alt="" className="icons" />
+        <img
+          src={search_icon}
+          alt="Search"
+          className="icons"
+          onClick={handleSearchToggle}
+        />
+
+        {showSearch && (
+          <form onSubmit={handleSearchSubmit} className="search-form">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search..."
+              className="search-input"
+              autoFocus
+            />
+          </form>
+        )}
+
         <img src={bell_icon} alt="" className="icons" />
         <div className="navbar-profile">
           <img src={profile_img} alt="" className="profile" />

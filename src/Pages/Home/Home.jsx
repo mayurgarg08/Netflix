@@ -15,8 +15,7 @@ const Home = () => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYjllNTQyZjljYmU0ZjE2NWMxNjZhOGJkOTkxODkzNiIsIm5iZiI6MTc0NjEzMTczNy4yMDYsInN1YiI6IjY4MTNkYjE5NWM1ODI4YjEyZmUwMjgyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1PgGVRKDO4RBXDVVz-mqVr-k3PINADytTbCupjk63hw",
+        Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
       },
     };
 

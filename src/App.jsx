@@ -6,6 +6,7 @@ import Player from "./Pages/Player/Player.jsx";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase.js";
 import { ToastContainer, toast } from "react-toastify";
+import SearchResults from "./pages/SearchResults/SearchResults";
 
 const App = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/player/:id" element={<Player />} />
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
     </div>
   );
