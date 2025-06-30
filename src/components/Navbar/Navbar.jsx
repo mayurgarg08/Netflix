@@ -50,9 +50,21 @@ const Navbar = () => {
   return (
     <div ref={navRef} className="navbar">
       <div className="navbar-left">
-        <img src={logo} alt="Netflix" />
+        <img
+          src={logo}
+          alt="Netflix"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
         <ul>
-          <li>Home</li>
+          <li
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Home
+          </li>
           <li>TV Shows</li>
           <li>Movies</li>
           <li>New & popular</li>

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import "./SearchResults.css";
+import back_arrow_icon from "../../assets/back_arrow_icon.png";
 
 const SearchResults = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const query = new URLSearchParams(location.search).get("q");
   const [results, setResults] = useState([]);
-  const [trailerKey, setTrailerKey] = useState(null);
-  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     if (query) {
@@ -30,71 +30,28 @@ const SearchResults = () => {
     }
   }, [query]);
 
-  const handleCardClick = async (movie) => {
-    setSelectedMovie(movie);
-    setTrailerKey(null);
-    try {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}/videos?language=en-US`,
-        {
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
-          },
-        }
-      );
-      const data = await res.json();
-      const trailer = data.results?.find(
-        (video) => video.type === "Trailer" && video.site === "YouTube"
-      );
-      if (trailer) {
-        setTrailerKey(trailer.key);
-      } else {
-        setTrailerKey(null);
-      }
-    } catch (err) {
-      setTrailerKey(null);
-    }
-  };
-
-  const handleCloseTrailer = () => {
-    setTrailerKey(null);
-    setSelectedMovie(null);
-  };
-
   return (
     <>
       <Navbar />
       <div className="search-page">
+        <img
+          src={back_arrow_icon}
+          className="back-arrow"
+          alt=""
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <div className="search-header">
           <h2>Results for "{query}"</h2>
         </div>
 
-        {/* Fullscreen Trailer Modal */}
-        {trailerKey && (
-          <div className="trailer-modal">
-            <div className="trailer-content">
-              <button className="close-btn" onClick={handleCloseTrailer}>
-                &#8592;
-              </button>
-              <iframe
-                className="trailer-video"
-                src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&loop=1&playlist=${trailerKey}&vq=hd1080`}
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-                title="Trailer"
-              ></iframe>
-            </div>
-          </div>
-        )}
-
         <div className="search-grid">
           {results.map((movie) => (
-            <div
+            <Link
+              to={`/search/player/${movie.id}`}
               key={movie.id}
               className="search-card"
-              onClick={() => handleCardClick(movie)}
-              style={{ cursor: "pointer" }}
             >
               <img
                 src={
@@ -106,7 +63,7 @@ const SearchResults = () => {
               />
               <h4>{movie.title}</h4>
               <p>{movie.release_date?.slice(0, 4) || "N/A"}</p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

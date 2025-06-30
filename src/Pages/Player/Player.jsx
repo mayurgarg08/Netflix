@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Player.css";
 import back_arrow_icon from "../../assets/back_arrow_icon.png";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 const Player = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [apiData, setApiData] = useState({
     name: "",
@@ -39,7 +40,11 @@ const Player = () => {
         src={back_arrow_icon}
         alt=""
         onClick={() => {
-          navigate(-2);
+          if (location.pathname.startsWith("/search/player/")) {
+            navigate(-1);
+          } else {
+            navigate(-2);
+          }
         }}
       />
       <iframe

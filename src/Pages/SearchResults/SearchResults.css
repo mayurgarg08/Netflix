@@ -14,6 +14,7 @@
 .search-header h2 {
   font-size: 26px;
   font-weight: 600;
+  margin-top: 20px;
   color: #e5e5e5;
 }
 
@@ -56,6 +57,14 @@
   color: #aaa;
 }
 
+.back-arrow {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  width: 40px;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .search-grid {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -75,51 +84,3 @@
   }
 }
 
-/* Fullscreen trailer modal */
-.trailer-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(10, 10, 10, 0.95);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
-
-.trailer-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: black;
-  padding: 0;
-}
-
-.trailer-video {
-  width: 100vw;
-  height: 100vh;
-  border: none;
-  background-color: #000;
-}
-
-/* Back arrow button */
-.close-btn {
-  position: absolute;
-  top: 20px;
-  left: 30px;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.trailer-title {
-  display: none;
-}
